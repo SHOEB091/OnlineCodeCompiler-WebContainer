@@ -1,0 +1,6 @@
+@CodeCompilerService_HostAddress = http://localhost:5215
+
+GET {{CodeCompilerService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

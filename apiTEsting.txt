@@ -1,0 +1,18 @@
+## Python 
+{
+    "code": "def add(a, b):\n    return a + b\n\nx, y = map(int, input().split())\nprint(add(x, y))",
+    "language": "python",
+    "testCases": [
+        {
+            "input": "1 2",
+            "expectedOutput": "3"
+        },
+        {
+            "input": "5 7",
+            "expectedOutput": "12"
+        }
+    ],
+    "timeoutSeconds": 5,
+    "memoryLimitMB": 256
+}
+
