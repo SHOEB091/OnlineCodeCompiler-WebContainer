@@ -8,8 +8,32 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add CORS with more comprehensive configuration
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(
+                "http://localhost:5057",  // Local development
+                "http://localhost:3000",  // React development
+                "http://localhost:4200",  // Angular development
+                "https://your-online-assessment-domain.com"  // Production domain
+            )
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .SetPreflightMaxAge(TimeSpan.FromMinutes(10));
+    });
+});
+
 // Register our compiler service
 builder.Services.AddScoped<ICompilerService, CompilerService>();
+
+// Configure HTTP client for the compiler service
+builder.Services.AddHttpClient("CompilerService", client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
 
 var app = builder.Build();
 
@@ -20,7 +44,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Use CORS before other middleware
+app.UseCors();
+
+// Temporarily comment out HTTPS redirection for testing
+// app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 

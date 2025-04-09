@@ -31,3 +31,4 @@
 /Users/shoebiqbal/Desktop/codeCompiler/CodeCompilerService/obj/Debug/net8.0/CodeCompilerService.pdb
 /Users/shoebiqbal/Desktop/codeCompiler/CodeCompilerService/obj/Debug/net8.0/CodeCompilerService.genruntimeconfig.cache
 /Users/shoebiqbal/Desktop/codeCompiler/CodeCompilerService/obj/Debug/net8.0/ref/CodeCompilerService.dll
+/Users/shoebiqbal/Desktop/codeCompiler/CodeCompilerService/obj/Debug/net8.0/CodeCompilerService.sourcelink.json

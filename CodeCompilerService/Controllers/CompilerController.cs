@@ -17,11 +17,77 @@ namespace CodeCompilerService.Controllers
             _logger = logger;
         }
 
+        [HttpPost("run-code")]
+        public async Task<ActionResult<UserInputResponse>> RunCode([FromBody] UserInputRequest request)
+        {
+            try
+            {
+                // Validate the request
+                if (string.IsNullOrEmpty(request.Code))
+                {
+                    return BadRequest(new UserInputResponse
+                    {
+                        Success = false,
+                        CompilationError = "Code cannot be empty"
+                    });
+                }
+
+                if (string.IsNullOrEmpty(request.Language))
+                {
+                    return BadRequest(new UserInputResponse
+                    {
+                        Success = false,
+                        CompilationError = "Language cannot be empty"
+                    });
+                }
+
+                var result = await _compilerService.RunCodeWithInputAsync(request);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing code execution request");
+                return BadRequest(new UserInputResponse
+                {
+                    Success = false,
+                    CompilationError = ex.Message
+                });
+            }
+        }
+
         [HttpPost("run-tests")]
         public async Task<ActionResult<TestResult>> RunTests([FromBody] TestRequest request)
         {
             try
             {
+                // Validate the request
+                if (string.IsNullOrEmpty(request.Code))
+                {
+                    return BadRequest(new TestResult
+                    {
+                        Success = false,
+                        CompilationError = "Code cannot be empty"
+                    });
+                }
+
+                if (string.IsNullOrEmpty(request.Language))
+                {
+                    return BadRequest(new TestResult
+                    {
+                        Success = false,
+                        CompilationError = "Language cannot be empty"
+                    });
+                }
+
+                if (request.TestCases == null || !request.TestCases.Any())
+                {
+                    return BadRequest(new TestResult
+                    {
+                        Success = false,
+                        CompilationError = "At least one test case is required"
+                    });
+                }
+
                 var result = await _compilerService.RunTestsAsync(request);
                 return Ok(result);
             }

@@ -14,13 +14,13 @@ WORKDIR /app
 # Install necessary compilers and runtimes
 RUN apt-get update && apt-get install -y \
     software-properties-common \
+    wget \
     && add-apt-repository ppa:deadsnakes/ppa \
     && apt-get update \
     && apt-get install -y \
     python3.10 \
     python3.10-distutils \
     python3-pip \
-    openjdk-17-jdk \
     gcc \
     g++ \
     nodejs \
@@ -28,12 +28,19 @@ RUN apt-get update && apt-get install -y \
     dotnet-sdk-8.0 \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Java 17
+RUN apt-get update && apt-get install -y openjdk-17-jdk && \
+    rm -rf /var/lib/apt/lists/*
+
 # Set up Python environment
 RUN python3 -m pip install --upgrade pip
 
 # Set up Java environment
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH=$PATH:$JAVA_HOME/bin
+
+# Verify Java installation
+RUN java -version && javac -version
 
 # Set up Node.js environment
 ENV NODE_PATH=/usr/lib/nodejs

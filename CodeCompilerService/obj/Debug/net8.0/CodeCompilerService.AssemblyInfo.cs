@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeCompilerService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+852afa193e6b818b41036de783459035fd2f114c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeCompilerService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeCompilerService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
